@@ -7,7 +7,7 @@ Nulos = 0
 Brancos = 0
 
 #Iniciando a votação
-
+print("Os candidatos a eleição são: Roberto(33), Elias(44), Maria(55), Simone(66).Para voto Branco será(00) e todos os votos divergentes destes, serão considerado NULOS")
 print("Digite 99, para encerrar a votação")
 
 while True :
@@ -46,6 +46,8 @@ if Votos > 0 :
     print("\n --- RESULTADO FINAL ---")
     print ("Nenhum voto computado")
 Resultados = [("Brancos",Brancos),("Nulos",Nulos),("Roberto",Roberto),("Elias",Elias),("Maria",Maria),("Simone",Simone)]
+Resultados_validos = [("Roberto",Roberto),("Elias",Elias),("Maria",Maria),("Simone",Simone)]
+Resultados_validos.sort(key=lambda x: x[1],reverse=True)
 Resultados.sort(key=lambda x: x[1],reverse=True)
 
 for nome, votos in Resultados:
@@ -55,14 +57,14 @@ for nome, votos in Resultados:
 votos_validos = Roberto + Elias + Maria + Simone
 
 if votos_validos > 0:
-    vencedor, votos_vencedor = Resultados [0]
+    vencedor, votos_vencedor = Resultados_validos [0]
     
     if(votos_vencedor / votos_validos ) > 0.5:
         
         print(f"\n {vencedor} venceu no 1º turno com {(votos_vencedor/ votos_validos)*100:.2f}% dos votos válidos!")
     else:
         print("\n Nenhum candidato venceu no 1º turno. Vamos ao 2º turno")
-        segundo_turno = [Resultados[0], Resultados [1]]
+        segundo_turno = [Resultados_validos [0], Resultados_validos [1]]
 
 #Em caso de empate, começamos o 2º turno. Apenas com o 1º e 2º colocado da votação, excluindo votos brancos e nulos
 
@@ -77,7 +79,7 @@ if votos_validos > 0:
                 break
             elif voto == 1:
                 votos_segundo[segundo_turno [0][0]] +=1
-            elif voto == 1:
+            elif voto == 2:
                 votos_segundo[segundo_turno [1][0]] +=1
             else:
                 print("Voto inválido")
